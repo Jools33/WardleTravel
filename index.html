@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/styles.css?v=4" />
-    <script src="assets/site.js?v=4"></script>
+    <link rel="stylesheet" href="assets/styles.css?v=5" />
+    <script src="assets/site.js?v=5"></script>
   </head>
   <body>
     <div id="gate"></div>
@@ -30,25 +30,10 @@
         <section class="booking-wrap" id="book">
           <div class="container">
             <form class="booking-card" data-demo-form="Online booking is a placeholder in this demo. In the real site this would search live holiday availability and prices.">
-              <div class="booking-tabs" role="group" aria-label="Holiday type">
-                <button type="button" class="chip active">✈️ Package holidays</button>
-                <button type="button" class="chip">🏙️ City breaks</button>
-                <button type="button" class="chip">🛳️ Cruises</button>
-              </div>
               <div class="booking-grid">
-                <div class="field wide">
+                <div class="field span-2">
                   <label for="b-dest">Where would you like to go?</label>
                   <input id="b-dest" placeholder="Destination, resort or hotel" />
-                </div>
-                <div class="field">
-                  <label for="b-from">Flying from</label>
-                  <select id="b-from">
-                    <option>Any UK airport</option>
-                    <option>Manchester</option>
-                    <option>Birmingham</option>
-                    <option>East Midlands</option>
-                    <option>Liverpool</option>
-                  </select>
                 </div>
                 <div class="field">
                   <label for="b-date">Departure date</label>
@@ -63,18 +48,33 @@
                     <option>14 nights</option>
                   </select>
                 </div>
+                <div class="field span-all">
+                  <label for="b-from">Flying from</label>
+                  <select id="b-from">
+                    <option>Any UK airport</option>
+                    <option>Manchester</option>
+                    <option>Birmingham</option>
+                    <option>East Midlands</option>
+                    <option>Liverpool</option>
+                  </select>
+                </div>
                 <div class="field">
                   <label for="b-adults">Adults</label>
                   <select id="b-adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
                 </div>
                 <div class="field">
                   <label for="b-kids">Children</label>
-                  <select id="b-kids"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+                  <select id="b-kids" data-child-count><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
                 </div>
-                <div class="field">
+                <div class="field span-2">
                   <label for="b-board">Board basis</label>
                   <select id="b-board"><option>Any</option><option>All inclusive</option><option>Full board</option><option>Half board</option><option>Bed &amp; breakfast</option><option>Self catering</option></select>
                 </div>
+                <!-- Filled with one age picker per child when Children is above 0 -->
+                <fieldset class="child-ages span-all" data-child-ages hidden>
+                  <legend>Children's ages on return</legend>
+                  <div class="child-ages-grid"></div>
+                </fieldset>
               </div>
               <div class="booking-actions">
                 <p class="note">Prefer to talk to someone? Call us or <a href="contact.html">visit us in store</a>.<br />Booking is a placeholder in this demo.</p>

@@ -236,14 +236,33 @@ function wireCarousels() {
   });
 }
 
-// Holiday type chips on the booking form are visual only.
-function wireBookingTabs() {
-  document.querySelectorAll(".booking-tabs").forEach((group) => {
-    group.addEventListener("click", (e) => {
-      const chip = e.target.closest(".chip");
-      if (!chip) return;
-      group.querySelectorAll(".chip").forEach((c) => c.classList.toggle("active", c === chip));
+// Show one age picker per child when the Children count changes.
+function wireChildAges() {
+  const count = document.querySelector("[data-child-count]");
+  const wrap = document.querySelector("[data-child-ages]");
+  if (!count || !wrap) return;
+  const grid = wrap.querySelector(".child-ages-grid");
+
+  const ageOptions = ['<option value="" selected disabled>Age</option>']
+    .concat(Array.from({ length: 18 }, (_, age) => `<option value="${age}">${age === 0 ? "Under 1" : age}</option>`))
+    .join("");
+
+  count.addEventListener("change", () => {
+    const n = Number(count.value);
+    // Keep any ages already picked when the count goes up or down.
+    const previous = Array.from(grid.querySelectorAll("select"), (sel) => sel.value);
+    grid.innerHTML = Array.from(
+      { length: n },
+      (_, i) => `
+        <div class="field">
+          <label for="b-child-${i + 1}">Child ${i + 1}</label>
+          <select id="b-child-${i + 1}" required>${ageOptions}</select>
+        </div>`
+    ).join("");
+    grid.querySelectorAll("select").forEach((sel, i) => {
+      if (previous[i]) sel.value = previous[i];
     });
+    wrap.hidden = n === 0;
   });
 }
 
@@ -283,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderBranch();
   wirePlaceholders();
   wireCarousels();
-  wireBookingTabs();
+  wireChildAges();
   if (document.documentElement.classList.contains("locked")) renderGate();
 });
 

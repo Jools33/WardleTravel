@@ -159,6 +159,33 @@ textarea {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
+/* Same height for every single-line control, and a custom dropdown arrow
+   set in from the right edge. */
+input,
+select {
+  height: 2.875rem;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2364748b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 8px;
+  cursor: pointer;
+}
+
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  line-height: normal;
+}
+
+input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+input[type="date"]::-webkit-calendar-picker-indicator { margin-right: 0.25rem; cursor: pointer; }
+
 input:focus,
 select:focus,
 textarea:focus {
@@ -945,15 +972,34 @@ details p { margin: 0.75rem 0 0; color: var(--slate-500); font-size: 0.95rem; }
   box-shadow: var(--shadow-lg);
 }
 
-.booking-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
-
 .booking-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0 0.75rem;
 }
 
-.booking-grid .wide { grid-column: span 2; }
+.booking-grid .span-2 { grid-column: span 2; }
+.booking-grid .span-all { grid-column: 1 / -1; }
+
+.child-ages {
+  border: 1px dashed var(--brand-200);
+  background: var(--brand-50);
+  border-radius: var(--radius-xl);
+  padding: 0.75rem 1rem 0.25rem;
+  margin: 0 0 1rem;
+  min-width: 0;
+}
+
+.child-ages[hidden] { display: none; }
+
+.child-ages legend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-700);
+  padding: 0 0.35rem;
+}
+
+.child-ages-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 0.75rem; }
 
 .booking-actions {
   display: flex;
@@ -968,7 +1014,7 @@ details p { margin: 0.75rem 0 0; color: var(--slate-500); font-size: 0.95rem; }
 
 @media (max-width: 860px) {
   .booking-grid { grid-template-columns: 1fr 1fr; }
-  .booking-grid .wide { grid-column: span 2; }
+  .child-ages-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 520px) {
@@ -1019,8 +1065,6 @@ details p { margin: 0.75rem 0 0; color: var(--slate-500); font-size: 0.95rem; }
   .book-hero .lead { font-size: 0.75rem; }
   .booking-wrap { margin-top: -3.75rem; }
   .booking-card { border-radius: var(--radius-2xl); }
-  .booking-tabs { gap: 0.35rem; margin-bottom: 1rem; }
-  .booking-tabs .chip { font-size: 0.78rem; padding: 0.4rem 0.75rem; }
   .field { margin-bottom: 0.75rem; }
 
   /* Inclusions become a compact 2x2 grid */
