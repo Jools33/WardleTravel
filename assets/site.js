@@ -9,7 +9,6 @@ const BUSINESS = {
     name: "Wardle Travel",
     address: ["1 High Street", "Anytown", "AB1 2CD"],
     phone: "01632 960123",
-    mobile: "07700 900123",
     email: "hello@example.com",
     hours: [
       ["Monday", "09:30 – 17:00"],
@@ -33,7 +32,7 @@ const directionsUrl = (address) =>
 // source can still be read. We store a SHA-256 hash rather than the passcode
 // itself so it is not sitting in plain text. To change it, hash the new
 // passcode (e.g. `echo -n "newcode" | sha256sum`) and paste it here.
-const PASSCODE_SHA256 = "b76c6c6a09610e7623a9b5795426803947d55ca4297cf90b93095b120d1bda68";
+const PASSCODE_SHA256 = "47ddf8876bdd708ca2b69625c9a3cc1de944e3350627fd53db0619075a30b54b";
 const GATE_KEY = "wt_unlocked";
 
 async function sha256(text) {
@@ -59,7 +58,7 @@ function renderGate() {
       <p>This demo site is not public yet. Enter the passcode to continue.</p>
       <input type="password" id="gate-input" placeholder="Passcode" autocomplete="current-password" autofocus />
       <p class="gate-error" id="gate-error" role="alert"></p>
-      <button type="submit" class="btn btn-teal btn-block">Continue</button>
+      <button type="submit" class="btn btn-accent btn-block">Continue</button>
     </form>`;
 
   const input = document.getElementById("gate-input");
@@ -112,7 +111,6 @@ function renderHeader() {
       <div class="container">
         <span class="topbar-links">
           <span>📞 <a href="${tel(b.phone)}">${b.phone}</a></span>
-          <span>📱 <a href="${tel(b.mobile)}">${b.mobile}</a></span>
         </span>
         <span class="topbar-links topbar-tagline">
           <a href="#" data-placeholder="Facebook page link to be added.">Facebook</a>
@@ -190,7 +188,7 @@ function renderFooter() {
         <div class="big">🚧</div>
         <h3 id="placeholder-title">Coming soon</h3>
         <p id="placeholder-text">This is a placeholder in the demo site and isn't connected to anything yet.</p>
-        <button class="btn btn-teal" data-close-modal>Got it</button>
+        <button class="btn btn-accent" data-close-modal>Got it</button>
       </div>
     </div>`;
 }
@@ -260,11 +258,10 @@ function renderBranch() {
         <dl>
           <dt>Address</dt><dd>${b.address.join("<br>")}</dd>
           <dt>Phone</dt><dd><a href="${tel(b.phone)}">${b.phone}</a></dd>
-          <dt>Mobile</dt><dd><a href="${tel(b.mobile)}">${b.mobile}</a></dd>
           <dt>Email</dt><dd><a href="mailto:${b.email}">${b.email}</a></dd>
         </dl>
         <div class="actions">
-          <a href="${tel(b.phone)}" class="btn btn-teal">Call us</a>
+          <a href="${tel(b.phone)}" class="btn btn-accent">Call us</a>
           <a href="${directionsUrl(b.address)}" target="_blank" rel="noopener" class="btn btn-ghost">Get directions</a>
           ${el.hasAttribute("data-branch-link") ? '<a href="contact.html" class="btn btn-ghost">View branch details</a>' : ""}
         </div>
