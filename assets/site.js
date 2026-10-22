@@ -1,0 +1,299 @@
+// Wardle Travel demo site: shared header/footer, passcode gate and small
+// interactive bits. No build step, so this runs as-is on GitHub Pages.
+
+// ---------- Business details (placeholders until real details are confirmed) ----------
+
+const BUSINESS = {
+  name: "Wardle Travel",
+  branches: [
+    {
+      name: "Town Centre",
+      address: ["1 High Street", "Anytown", "AB1 2CD"],
+      phone: "01632 960123",
+      hours: "Mon–Sat 09:00–17:30",
+    },
+    {
+      name: "Market Square",
+      address: ["2 Market Square", "Othertown", "AB3 4EF"],
+      phone: "01632 960456",
+      hours: "Mon–Fri 09:30–17:00",
+    },
+  ],
+};
+
+const tel = (phone) => "tel:+44" + phone.replace(/\s/g, "").replace(/^0/, "");
+
+// ---------- Passcode gate ----------
+
+// This is only a light hiding mechanism: GitHub Pages is public and the page
+// source can still be read. We store a SHA-256 hash rather than the passcode
+// itself so it is not sitting in plain text. To change it, hash the new
+// passcode (e.g. `echo -n "newcode" | sha256sum`) and paste it here.
+const PASSCODE_SHA256 = "b76c6c6a09610e7623a9b5795426803947d55ca4297cf90b93095b120d1bda68";
+const GATE_KEY = "wt_unlocked";
+
+async function sha256(text) {
+  const bytes = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function isUnlocked() {
+  try {
+    return sessionStorage.getItem(GATE_KEY) === PASSCODE_SHA256;
+  } catch {
+    return false;
+  }
+}
+
+function renderGate() {
+  const gate = document.getElementById("gate");
+  gate.innerHTML = `
+    <form class="gate-card" id="gate-form">
+      <div class="logo">${logoHtml()}</div>
+      <h1>Private preview</h1>
+      <p>This demo site is not public yet. Enter the passcode to continue.</p>
+      <input type="password" id="gate-input" placeholder="Passcode" autocomplete="current-password" autofocus />
+      <p class="gate-error" id="gate-error" role="alert"></p>
+      <button type="submit" class="btn btn-teal btn-block">Continue</button>
+    </form>`;
+
+  const input = document.getElementById("gate-input");
+  const error = document.getElementById("gate-error");
+
+  input.addEventListener("input", () => (error.textContent = ""));
+  document.getElementById("gate-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const hash = await sha256(input.value.trim());
+    if (hash === PASSCODE_SHA256) {
+      try {
+        sessionStorage.setItem(GATE_KEY, hash);
+      } catch {
+        /* storage blocked: stay unlocked for this page view only */
+      }
+      document.documentElement.classList.remove("locked");
+      window.scrollTo(0, 0);
+    } else {
+      error.textContent = "Incorrect passcode.";
+      input.select();
+    }
+  });
+  input.focus();
+}
+
+// ---------- Shared layout ----------
+
+function logoHtml() {
+  return `
+    <span class="logo-mark" aria-hidden="true">🧭</span>
+    <span class="logo-text"><strong>Wardle Travel</strong><span>Family-run travel agents</span></span>`;
+}
+
+const NAV = [
+  ["index.html", "Home"],
+  ["offers.html", "Offers"],
+  ["destinations.html", "Destinations"],
+  ["about.html", "About"],
+  ["contact.html", "Contact"],
+];
+
+function renderHeader() {
+  const current = location.pathname.split("/").pop() || "index.html";
+  const main = BUSINESS.branches[0];
+  const links = NAV.map(
+    ([href, label]) => `<a href="${href}" class="${href === current ? "active" : ""}">${label}</a>`
+  ).join("");
+
+  document.getElementById("site-header").innerHTML = `
+    <div class="demo-banner">Demo site · all content, prices and reviews are placeholders</div>
+    <div class="topbar">
+      <div class="container">
+        <span class="topbar-tagline">ABTA &amp; ATOL protected holidays · Independent, family-run agency</span>
+        <span class="topbar-links">
+          ${BUSINESS.branches.map((b) => `<span>${b.name}: <a href="${tel(b.phone)}">${b.phone}</a></span>`).join("")}
+          <a href="booking.html#manage">My Booking</a>
+        </span>
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="logo" aria-label="Wardle Travel home">${logoHtml()}</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+        <nav class="nav" id="nav">
+          ${links}
+          <a href="booking.html" class="btn btn-primary">Book online</a>
+        </nav>
+      </div>
+    </header>`;
+
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("nav");
+  toggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "✕" : "☰";
+  });
+
+  // Keep the main phone number handy for pages that want it.
+  document.querySelectorAll("[data-main-phone]").forEach((el) => {
+    el.textContent = main.phone;
+    if (el.tagName === "A") el.href = tel(main.phone);
+  });
+}
+
+function renderFooter() {
+  const year = new Date().getFullYear();
+  document.getElementById("site-footer").innerHTML = `
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html" class="logo">${logoHtml()}</a>
+            <p>Your local independent travel agent. Real people, honest advice and holidays booked with care.</p>
+            <div class="trust-row"><span>ABTA</span><span>ATOL</span><span>★ 4.9 Google</span></div>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="offers.html">Latest offers</a></li>
+              <li><a href="destinations.html">Destinations</a></li>
+              <li><a href="booking.html">Book online</a></li>
+              <li><a href="booking.html#manage">My Booking</a></li>
+              <li><a href="contact.html#quote">Get a quote</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Information</h4>
+            <ul>
+              <li><a href="about.html">About us</a></li>
+              <li><a href="about.html#faq">FAQs</a></li>
+              <li><a href="#" data-placeholder>Travel insurance</a></li>
+              <li><a href="#" data-placeholder>Terms &amp; conditions</a></li>
+              <li><a href="#" data-placeholder>Privacy &amp; cookies</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Visit us</h4>
+            <ul>
+              ${BUSINESS.branches
+                .map(
+                  (b) => `<li><strong style="color:#fff">${b.name}</strong><br>${b.address.join(", ")}<br><a href="${tel(b.phone)}">${b.phone}</a></li>`
+                )
+                .join("")}
+            </ul>
+          </div>
+        </div>
+        <div class="footer-legal">
+          <p><strong style="color:#e2e8f0">Book with confidence.</strong> Placeholder text: protection details, ABTA number (Pxxxx) and ATOL number (xxxxx) will go here once confirmed. Many of the flights and flight-inclusive holidays on this website are financially protected by the ATOL scheme.</p>
+          <p>Before you travel, check the latest <a href="https://www.gov.uk/foreign-travel-advice" target="_blank" rel="noopener">FCDO foreign travel advice</a>.</p>
+          <p>© ${year} Wardle Travel. Demo website for stakeholder review. Company number and registered office: placeholder.</p>
+        </div>
+      </div>
+    </footer>
+    <a href="contact.html#quote" class="whatsapp-fab" data-placeholder aria-label="Message us on WhatsApp">💬 <span class="label">WhatsApp us</span></a>
+    <div class="modal-backdrop" id="placeholder-modal" role="dialog" aria-modal="true" aria-labelledby="placeholder-title">
+      <div class="modal">
+        <div class="big">🚧</div>
+        <h3 id="placeholder-title">Coming soon</h3>
+        <p id="placeholder-text">This is a placeholder in the demo site and isn't connected to anything yet.</p>
+        <button class="btn btn-teal" data-close-modal>Got it</button>
+      </div>
+    </div>`;
+}
+
+// ---------- Placeholder interactions ----------
+
+function showPlaceholder(text) {
+  const modal = document.getElementById("placeholder-modal");
+  document.getElementById("placeholder-text").textContent =
+    text || "This is a placeholder in the demo site and isn't connected to anything yet.";
+  modal.classList.add("open");
+}
+
+function wirePlaceholders() {
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-placeholder]");
+    if (trigger) {
+      e.preventDefault();
+      showPlaceholder(trigger.dataset.placeholder || undefined);
+    }
+    if (e.target.closest("[data-close-modal]") || e.target.id === "placeholder-modal") {
+      document.getElementById("placeholder-modal").classList.remove("open");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") document.getElementById("placeholder-modal")?.classList.remove("open");
+  });
+
+  // Every form on the demo is a placeholder: show a friendly message instead of submitting.
+  document.querySelectorAll("form[data-demo-form]").forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      showPlaceholder(form.dataset.demoForm || undefined);
+    });
+  });
+}
+
+function wireCarousels() {
+  document.querySelectorAll("[data-carousel]").forEach((wrap) => {
+    const track = wrap.querySelector(".reviews");
+    const step = () => track.querySelector(".review").offsetWidth + 20;
+    wrap.querySelector("[data-prev]")?.addEventListener("click", () => track.scrollBy({ left: -step() }));
+    wrap.querySelector("[data-next]")?.addEventListener("click", () => track.scrollBy({ left: step() }));
+  });
+}
+
+function wireFilters() {
+  document.querySelectorAll("[data-filter-group]").forEach((group) => {
+    const target = document.getElementById(group.dataset.filterGroup);
+    group.addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if (!chip) return;
+      group.querySelectorAll(".chip").forEach((c) => c.classList.toggle("active", c === chip));
+      const tag = chip.dataset.filter;
+      target.querySelectorAll("[data-tags]").forEach((item) => {
+        item.hidden = tag !== "all" && !item.dataset.tags.split(" ").includes(tag);
+      });
+    });
+  });
+}
+
+function renderBranches() {
+  document.querySelectorAll("[data-branches]").forEach((el) => {
+    const withMap = el.hasAttribute("data-with-map");
+    el.innerHTML = BUSINESS.branches
+      .map(
+        (b) => `
+        <div class="card branch">
+          ${withMap ? '<div class="ph map-ph">📍</div>' : ""}
+          <h3>📍 ${b.name}</h3>
+          <dl>
+            <dt>Address</dt><dd>${b.address.join("<br>")}</dd>
+            <dt>Phone</dt><dd><a href="${tel(b.phone)}">${b.phone}</a></dd>
+            <dt>Hours</dt><dd>${b.hours}</dd>
+          </dl>
+          <div class="actions">
+            <a href="${tel(b.phone)}" class="btn btn-teal">Call ${b.name}</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.address.join(", "))}" target="_blank" rel="noopener" class="btn btn-ghost">Directions</a>
+          </div>
+        </div>`
+      )
+      .join("");
+  });
+}
+
+// ---------- Boot ----------
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderHeader();
+  renderFooter();
+  renderBranches();
+  wirePlaceholders();
+  wireCarousels();
+  wireFilters();
+  if (document.documentElement.classList.contains("locked")) renderGate();
+});
+
+// Decide lock state as early as possible so content never flashes.
+if (isUnlocked()) document.documentElement.classList.remove("locked");

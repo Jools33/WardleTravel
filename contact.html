@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB" class="locked">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Contact | Wardle Travel</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script src="assets/site.js"></script>
+  </head>
+  <body>
+    <div id="gate"></div>
+
+    <div id="app">
+      <div id="site-header"></div>
+
+      <main>
+        <section class="page-hero">
+          <div class="container">
+            <div class="crumbs"><a href="index.html">Home</a> / Contact</div>
+            <h1>Get in touch</h1>
+            <p>Call, message or pop in. Or send us your holiday ideas and we'll come back with a no-obligation quote.</p>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <div class="grid cols-2" data-branches data-with-map></div>
+          </div>
+        </section>
+
+        <section class="section section-white" id="quote">
+          <div class="container split" style="align-items:start">
+            <div>
+              <span class="kicker">Free quote</span>
+              <h2>Tell us about your dream trip</h2>
+              <p class="muted">Placeholder copy. Share as much or as little as you like and one of our team will be in touch, usually within one working day.</p>
+              <ul class="checklist">
+                <li>No obligation and no booking fees</li>
+                <li>We compare hundreds of operators for you</li>
+                <li>Prefer to chat? Call us or WhatsApp</li>
+              </ul>
+              <div class="notice notice-teal"><span>💬</span><span>WhatsApp and live chat are placeholders in this demo.</span></div>
+            </div>
+            <form class="card" data-demo-form="Thanks! In the real site this enquiry would be sent to the Wardle Travel team. This form is a placeholder.">
+              <div class="grid-2">
+                <div class="field"><label for="c-name">Your name</label><input id="c-name" required /></div>
+                <div class="field"><label for="c-phone">Phone</label><input id="c-phone" type="tel" /></div>
+              </div>
+              <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" required /></div>
+              <div class="grid-2">
+                <div class="field"><label for="c-dest">Destination</label><input id="c-dest" placeholder="Anywhere sunny" /></div>
+                <div class="field"><label for="c-when">When</label><input id="c-when" type="month" /></div>
+              </div>
+              <div class="grid-2">
+                <div class="field"><label for="c-who">Who's travelling</label><select id="c-who"><option>2 adults</option><option>Family</option><option>Solo</option><option>Group</option></select></div>
+                <div class="field"><label for="c-budget">Budget pp</label><select id="c-budget"><option>Under £500</option><option>£500–£1,000</option><option>£1,000–£2,000</option><option>£2,000+</option></select></div>
+              </div>
+              <div class="field"><label for="c-msg">Anything else?</label><textarea id="c-msg" rows="4" placeholder="Tell us what would make it perfect"></textarea></div>
+              <button class="btn btn-primary btn-block">Send enquiry</button>
+              <p class="note">This form is a placeholder and doesn't send anything.</p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <div id="site-footer"></div>
+    </div>
+  </body>
+</html>
