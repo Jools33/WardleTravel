@@ -1,19 +1,18 @@
 # Wardle Travel demo site
 
-A static, placeholder-content demo of the Wardle Travel website for stakeholder review. Styling (colours, Inter font, rounded cards) is borrowed from Wardle Compass; layout takes the best bits of jlmtravel.co.uk and wonderlingtravel.co.uk.
+A static, placeholder-content demo of the Wardle Travel website for stakeholder review. Styling (colours, Inter font, rounded cards) is borrowed from Wardle Compass; layout follows wonderlingtravel.co.uk.
 
 There's no build step: plain HTML, CSS and JavaScript, so it runs as-is on GitHub Pages.
 
 ## Pages
 
-- `index.html` – home: hero with quick search, inclusions, why us, offers, reviews, welcome, destinations, branches
-- `offers.html` – filterable offers
-- `destinations.html` – filterable destinations
-- `about.html` – story, stats, team, FAQs
-- `contact.html` – branches and quote form
-- `booking.html` – placeholder booking journey and Manage My Booking
+The format follows wonderlingtravel.co.uk: booking first, then contact and about.
 
-All forms, booking, WhatsApp and newsletter are placeholders that show a "coming soon" message.
+- `index.html` – home: "Book online today" hero with the booking form front and centre, what's included, welcome, testimonials, visit us
+- `about.html` – who we are, team, ready to book
+- `contact.html` – branch details, opening hours, map placeholder, enquiry form
+
+The booking form, enquiry form and social links are placeholders that show a "coming soon" message.
 
 ## Passcode
 

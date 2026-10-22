@@ -5,23 +5,27 @@
 
 const BUSINESS = {
   name: "Wardle Travel",
-  branches: [
-    {
-      name: "Town Centre",
-      address: ["1 High Street", "Anytown", "AB1 2CD"],
-      phone: "01632 960123",
-      hours: "Mon–Sat 09:00–17:30",
-    },
-    {
-      name: "Market Square",
-      address: ["2 Market Square", "Othertown", "AB3 4EF"],
-      phone: "01632 960456",
-      hours: "Mon–Fri 09:30–17:00",
-    },
-  ],
+  branch: {
+    name: "Wardle Travel",
+    address: ["1 High Street", "Anytown", "AB1 2CD"],
+    phone: "01632 960123",
+    mobile: "07700 900123",
+    email: "hello@example.com",
+    hours: [
+      ["Monday", "09:30 – 17:00"],
+      ["Tuesday", "09:30 – 17:00"],
+      ["Wednesday", "09:30 – 17:00"],
+      ["Thursday", "09:30 – 17:00"],
+      ["Friday", "09:30 – 17:00"],
+      ["Saturday", "10:00 – 14:00"],
+      ["Sunday", "Closed"],
+    ],
+  },
 };
 
 const tel = (phone) => "tel:+44" + phone.replace(/\s/g, "").replace(/^0/, "");
+const directionsUrl = (address) =>
+  "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address.join(", "));
 
 // ---------- Passcode gate ----------
 
@@ -91,15 +95,13 @@ function logoHtml() {
 
 const NAV = [
   ["index.html", "Home"],
-  ["offers.html", "Offers"],
-  ["destinations.html", "Destinations"],
   ["about.html", "About"],
   ["contact.html", "Contact"],
 ];
 
 function renderHeader() {
   const current = location.pathname.split("/").pop() || "index.html";
-  const main = BUSINESS.branches[0];
+  const b = BUSINESS.branch;
   const links = NAV.map(
     ([href, label]) => `<a href="${href}" class="${href === current ? "active" : ""}">${label}</a>`
   ).join("");
@@ -108,10 +110,13 @@ function renderHeader() {
     <div class="demo-banner">Demo site · all content, prices and reviews are placeholders</div>
     <div class="topbar">
       <div class="container">
-        <span class="topbar-tagline">ABTA &amp; ATOL protected holidays · Independent, family-run agency</span>
         <span class="topbar-links">
-          ${BUSINESS.branches.map((b) => `<span>${b.name}: <a href="${tel(b.phone)}">${b.phone}</a></span>`).join("")}
-          <a href="booking.html#manage">My Booking</a>
+          <span>📞 <a href="${tel(b.phone)}">${b.phone}</a></span>
+          <span>📱 <a href="${tel(b.mobile)}">${b.mobile}</a></span>
+        </span>
+        <span class="topbar-links topbar-tagline">
+          <a href="#" data-placeholder="Facebook page link to be added.">Facebook</a>
+          <a href="#" data-placeholder="Instagram link to be added.">Instagram</a>
         </span>
       </div>
     </div>
@@ -121,7 +126,7 @@ function renderHeader() {
         <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
         <nav class="nav" id="nav">
           ${links}
-          <a href="booking.html" class="btn btn-primary">Book online</a>
+          <a href="index.html#book" class="btn btn-primary">Book online</a>
         </nav>
       </div>
     </header>`;
@@ -133,64 +138,53 @@ function renderHeader() {
     toggle.setAttribute("aria-expanded", String(open));
     toggle.textContent = open ? "✕" : "☰";
   });
-
-  // Keep the main phone number handy for pages that want it.
-  document.querySelectorAll("[data-main-phone]").forEach((el) => {
-    el.textContent = main.phone;
-    if (el.tagName === "A") el.href = tel(main.phone);
-  });
 }
 
 function renderFooter() {
   const year = new Date().getFullYear();
+  const b = BUSINESS.branch;
   document.getElementById("site-footer").innerHTML = `
     <footer class="site-footer">
       <div class="container">
         <div class="footer-grid">
           <div>
             <a href="index.html" class="logo">${logoHtml()}</a>
-            <p>Your local independent travel agent. Real people, honest advice and holidays booked with care.</p>
-            <div class="trust-row"><span>ABTA</span><span>ATOL</span><span>★ 4.9 Google</span></div>
+            <p>Your local, family-owned independent travel agency. Placeholder text: sells on behalf of an ABTA member (details to be confirmed).</p>
+            <div class="trust-row"><span>ABTA</span><span>ATOL</span></div>
           </div>
           <div>
-            <h4>Explore</h4>
+            <h4>Wardle Travel</h4>
             <ul>
-              <li><a href="offers.html">Latest offers</a></li>
-              <li><a href="destinations.html">Destinations</a></li>
-              <li><a href="booking.html">Book online</a></li>
-              <li><a href="booking.html#manage">My Booking</a></li>
-              <li><a href="contact.html#quote">Get a quote</a></li>
+              <li><a href="index.html#book">Book online</a></li>
+              <li><a href="about.html">About us</a></li>
+              <li><a href="contact.html">Contact us</a></li>
             </ul>
           </div>
           <div>
-            <h4>Information</h4>
+            <h4>Policies</h4>
             <ul>
-              <li><a href="about.html">About us</a></li>
-              <li><a href="about.html#faq">FAQs</a></li>
-              <li><a href="#" data-placeholder>Travel insurance</a></li>
-              <li><a href="#" data-placeholder>Terms &amp; conditions</a></li>
-              <li><a href="#" data-placeholder>Privacy &amp; cookies</a></li>
+              <li><a href="#" data-placeholder="Terms &amp; conditions to be added.">Terms &amp; conditions</a></li>
+              <li><a href="#" data-placeholder="Privacy policy to be added.">Privacy policy</a></li>
+              <li><a href="#" data-placeholder="Cookies policy to be added.">Cookies policy</a></li>
+              <li><a href="https://www.gov.uk/foreign-travel-advice" target="_blank" rel="noopener">Foreign travel advice</a></li>
+              <li><a href="https://travelaware.campaign.gov.uk/" target="_blank" rel="noopener">Travel Aware</a></li>
             </ul>
           </div>
           <div>
             <h4>Visit us</h4>
             <ul>
-              ${BUSINESS.branches
-                .map(
-                  (b) => `<li><strong style="color:#fff">${b.name}</strong><br>${b.address.join(", ")}<br><a href="${tel(b.phone)}">${b.phone}</a></li>`
-                )
-                .join("")}
+              <li>${b.address.join("<br>")}</li>
+              <li><a href="${tel(b.phone)}">${b.phone}</a></li>
+              <li><a href="mailto:${b.email}">${b.email}</a></li>
             </ul>
           </div>
         </div>
         <div class="footer-legal">
-          <p><strong style="color:#e2e8f0">Book with confidence.</strong> Placeholder text: protection details, ABTA number (Pxxxx) and ATOL number (xxxxx) will go here once confirmed. Many of the flights and flight-inclusive holidays on this website are financially protected by the ATOL scheme.</p>
-          <p>Before you travel, check the latest <a href="https://www.gov.uk/foreign-travel-advice" target="_blank" rel="noopener">FCDO foreign travel advice</a>.</p>
+          <p><strong style="color:#e2e8f0">Book with confidence.</strong> Placeholder text: ABTA membership number, ATOL details and the ABTA Code of Conduct and arbitration information will go here once confirmed.</p>
           <p>© ${year} Wardle Travel. Demo website for stakeholder review. Company number and registered office: placeholder.</p>
         </div>
       </div>
     </footer>
-    <a href="contact.html#quote" class="whatsapp-fab" data-placeholder aria-label="Message us on WhatsApp">💬 <span class="label">WhatsApp us</span></a>
     <div class="modal-backdrop" id="placeholder-modal" role="dialog" aria-modal="true" aria-labelledby="placeholder-title">
       <div class="modal">
         <div class="big">🚧</div>
@@ -244,42 +238,43 @@ function wireCarousels() {
   });
 }
 
-function wireFilters() {
-  document.querySelectorAll("[data-filter-group]").forEach((group) => {
-    const target = document.getElementById(group.dataset.filterGroup);
+// Holiday type chips on the booking form are visual only.
+function wireBookingTabs() {
+  document.querySelectorAll(".booking-tabs").forEach((group) => {
     group.addEventListener("click", (e) => {
       const chip = e.target.closest(".chip");
       if (!chip) return;
       group.querySelectorAll(".chip").forEach((c) => c.classList.toggle("active", c === chip));
-      const tag = chip.dataset.filter;
-      target.querySelectorAll("[data-tags]").forEach((item) => {
-        item.hidden = tag !== "all" && !item.dataset.tags.split(" ").includes(tag);
-      });
     });
   });
 }
 
-function renderBranches() {
-  document.querySelectorAll("[data-branches]").forEach((el) => {
-    const withMap = el.hasAttribute("data-with-map");
-    el.innerHTML = BUSINESS.branches
-      .map(
-        (b) => `
-        <div class="card branch">
-          ${withMap ? '<div class="ph map-ph">📍</div>' : ""}
-          <h3>📍 ${b.name}</h3>
-          <dl>
-            <dt>Address</dt><dd>${b.address.join("<br>")}</dd>
-            <dt>Phone</dt><dd><a href="${tel(b.phone)}">${b.phone}</a></dd>
-            <dt>Hours</dt><dd>${b.hours}</dd>
-          </dl>
-          <div class="actions">
-            <a href="${tel(b.phone)}" class="btn btn-teal">Call ${b.name}</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.address.join(", "))}" target="_blank" rel="noopener" class="btn btn-ghost">Directions</a>
-          </div>
-        </div>`
-      )
-      .join("");
+// Fills any element marked data-branch with the branch card, and
+// data-hours with the opening hours table.
+function renderBranch() {
+  const b = BUSINESS.branch;
+  document.querySelectorAll("[data-branch]").forEach((el) => {
+    el.innerHTML = `
+      <div class="card branch">
+        <h3>📍 ${b.name}</h3>
+        <dl>
+          <dt>Address</dt><dd>${b.address.join("<br>")}</dd>
+          <dt>Phone</dt><dd><a href="${tel(b.phone)}">${b.phone}</a></dd>
+          <dt>Mobile</dt><dd><a href="${tel(b.mobile)}">${b.mobile}</a></dd>
+          <dt>Email</dt><dd><a href="mailto:${b.email}">${b.email}</a></dd>
+        </dl>
+        <div class="actions">
+          <a href="${tel(b.phone)}" class="btn btn-teal">Call us</a>
+          <a href="${directionsUrl(b.address)}" target="_blank" rel="noopener" class="btn btn-ghost">Get directions</a>
+          ${el.hasAttribute("data-branch-link") ? '<a href="contact.html" class="btn btn-ghost">View branch details</a>' : ""}
+        </div>
+      </div>`;
+  });
+  document.querySelectorAll("[data-hours]").forEach((el) => {
+    el.innerHTML = `
+      <table class="hours">
+        ${b.hours.map(([day, time]) => `<tr><th>${day}</th><td class="${time === "Closed" ? "closed" : ""}">${time}</td></tr>`).join("")}
+      </table>`;
   });
 }
 
@@ -288,10 +283,10 @@ function renderBranches() {
 document.addEventListener("DOMContentLoaded", () => {
   renderHeader();
   renderFooter();
-  renderBranches();
+  renderBranch();
   wirePlaceholders();
   wireCarousels();
-  wireFilters();
+  wireBookingTabs();
   if (document.documentElement.classList.contains("locked")) renderGate();
 });
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Wardle Travel | Independent travel agent</title>
+    <title>Wardle Travel | Your local independent travel agency</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,190 +19,122 @@
       <div id="site-header"></div>
 
       <main>
-        <!-- Hero: JLM-style headline and trust badges, with a Wonderling-style "book online" quick search -->
-        <section class="hero">
+        <!-- Hero: "Book online today" headline, with the booking form overlapping it front and centre -->
+        <section class="hero book-hero">
           <div class="container">
-            <div>
-              <span class="eyebrow">✦ Your local independent travel agency</span>
-              <h1>Great value holidays.<br />Expert, friendly advice.</h1>
-              <p class="lead">
-                Placeholder intro. Helping you see the world with confidence, from sun-soaked
-                family breaks to once-in-a-lifetime adventures.
-              </p>
-              <div class="hero-ctas">
-                <a href="contact.html#quote" class="btn btn-primary">Get a free quote</a>
-                <a href="#" class="btn btn-light" data-placeholder="WhatsApp chat will open here once a business number is set up.">💬 WhatsApp us</a>
-              </div>
-              <div class="badges">
-                <span class="badge">🛡️ ATOL protected</span>
-                <span class="badge">✅ ABTA member</span>
-                <span class="badge">★ 4.9 on Google</span>
-                <span class="badge">👨‍👩‍👧 Family run</span>
-              </div>
-            </div>
+            <h1>Book online today</h1>
+            <p class="lead">With your local independent travel agency</p>
+          </div>
+        </section>
 
-            <form class="search-card" data-demo-form="Online booking is a placeholder in this demo. In the real site this would search live holiday availability.">
-              <h2>Book online today</h2>
-              <p class="sub">Search package holidays, city breaks and cruises.</p>
-              <div class="field">
-                <label for="q-dest">Where to?</label>
-                <input id="q-dest" placeholder="e.g. Tenerife, Rome, Caribbean" />
+        <section class="booking-wrap" id="book">
+          <div class="container">
+            <form class="booking-card" data-demo-form="Online booking is a placeholder in this demo. In the real site this would search live holiday availability and prices.">
+              <div class="booking-tabs" role="group" aria-label="Holiday type">
+                <button type="button" class="chip active">✈️ Package holidays</button>
+                <button type="button" class="chip">🏙️ City breaks</button>
+                <button type="button" class="chip">🛳️ Cruises</button>
               </div>
-              <div class="grid-2">
+              <div class="booking-grid">
+                <div class="field wide">
+                  <label for="b-dest">Where would you like to go?</label>
+                  <input id="b-dest" placeholder="Destination, resort or hotel" />
+                </div>
                 <div class="field">
-                  <label for="q-from">Flying from</label>
-                  <select id="q-from">
+                  <label for="b-from">Flying from</label>
+                  <select id="b-from">
+                    <option>Any UK airport</option>
                     <option>Manchester</option>
                     <option>Birmingham</option>
                     <option>East Midlands</option>
                     <option>Liverpool</option>
-                    <option>Any UK airport</option>
                   </select>
                 </div>
                 <div class="field">
-                  <label for="q-date">Departing</label>
-                  <input id="q-date" type="month" />
+                  <label for="b-date">Departure date</label>
+                  <input id="b-date" type="date" />
                 </div>
-              </div>
-              <div class="grid-2">
                 <div class="field">
-                  <label for="q-nights">Nights</label>
-                  <select id="q-nights">
-                    <option>7 nights</option>
+                  <label for="b-nights">Nights</label>
+                  <select id="b-nights">
+                    <option>3 nights</option>
+                    <option selected>7 nights</option>
                     <option>10 nights</option>
                     <option>14 nights</option>
-                    <option>Flexible</option>
                   </select>
                 </div>
                 <div class="field">
-                  <label for="q-people">Guests</label>
-                  <select id="q-people">
-                    <option>2 adults</option>
-                    <option>2 adults, 1 child</option>
-                    <option>2 adults, 2 children</option>
-                    <option>1 adult</option>
-                  </select>
+                  <label for="b-adults">Adults</label>
+                  <select id="b-adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+                </div>
+                <div class="field">
+                  <label for="b-kids">Children</label>
+                  <select id="b-kids"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+                </div>
+                <div class="field">
+                  <label for="b-board">Board basis</label>
+                  <select id="b-board"><option>Any</option><option>All inclusive</option><option>Full board</option><option>Half board</option><option>Bed &amp; breakfast</option><option>Self catering</option></select>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Search holidays</button>
-              <p class="note">Booking is a placeholder in this demo.</p>
+              <div class="booking-actions">
+                <p class="note">Prefer to talk to someone? Call us or <a href="contact.html">visit us in store</a>.<br />Booking is a placeholder in this demo.</p>
+                <button type="submit" class="btn btn-primary">Search holidays</button>
+              </div>
             </form>
-          </div>
-        </section>
 
-        <!-- Inclusions strip: Wonderling-style "get all this included" -->
-        <section class="inclusions">
-          <div class="container">
-            <div class="card">
-              <div class="grid">
-                <div class="inclusion">
-                  <div class="icon">🧳</div>
-                  <div><strong>22kg luggage</strong><span>Hold luggage included on package holidays</span></div>
-                </div>
-                <div class="inclusion">
-                  <div class="icon">💷</div>
-                  <div><strong>Low deposits</strong><span>Secure your holiday from £60pp, pay the rest later</span></div>
-                </div>
-                <div class="inclusion">
-                  <div class="icon">🚌</div>
-                  <div><strong>Transfers included</strong><span>Resort transfers on most packages*</span></div>
-                </div>
-                <div class="inclusion">
-                  <div class="icon">🛡️</div>
-                  <div><strong>Fully protected</strong><span>ABTA &amp; ATOL financial protection</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Why book with us: JLM-style emoji feature tiles -->
-        <section class="section">
-          <div class="container">
-            <div class="section-head center">
-              <span class="kicker">Why Wardle Travel</span>
-              <h2>Holidays booked by real people who care</h2>
-              <p>Placeholder copy. All the choice of the big online brands, with a friendly local team to look after you from first idea to safe return.</p>
-            </div>
+            <!-- "Get all this included" -->
+            <p class="included-head">Get all this included…</p>
             <div class="grid cols-4">
-              <div class="card feature">
-                <div class="emoji">🌍</div>
-                <h3>Worldwide destinations</h3>
-                <p>Beach, city, cruise, safari, ski and everything in between.</p>
+              <div class="card inclusion">
+                <div class="icon">🧳</div>
+                <div><strong>22kg hold luggage</strong><span>Included on package holidays</span></div>
               </div>
-              <div class="card feature">
-                <div class="emoji">💰</div>
-                <h3>Competitive prices</h3>
-                <p>We search hundreds of operators to find you the best value.</p>
+              <div class="card inclusion">
+                <div class="icon">💷</div>
+                <div><strong>£60pp deposit</strong><span>Secure your holiday now, pay the rest later</span></div>
               </div>
-              <div class="card feature">
-                <div class="emoji">🧑‍💼</div>
-                <h3>Expert advice</h3>
-                <p>Decades of first-hand travel knowledge on your side.</p>
+              <div class="card inclusion">
+                <div class="icon">🚌</div>
+                <div><strong>Transfers included</strong><span>Coach transfers to your hotel*</span></div>
               </div>
-              <div class="card feature">
-                <div class="emoji">🤝</div>
-                <h3>Here when it matters</h3>
-                <p>Changes, extra bags or delays: one call and we sort it.</p>
+              <div class="card inclusion">
+                <div class="icon">🛡️</div>
+                <div><strong>ATOL &amp; ABTA</strong><span>Financial protection on package holidays</span></div>
               </div>
             </div>
+            <p class="note">*Placeholder. Transfers not included with city breaks.</p>
           </div>
         </section>
 
-        <!-- Featured offers -->
-        <section class="section section-white">
-          <div class="container">
-            <div class="row-between">
-              <div class="section-head">
-                <span class="kicker">Hand-picked deals</span>
-                <h2>Latest offers</h2>
-                <p>Placeholder offers. Prices are examples only.</p>
-              </div>
-              <a href="offers.html" class="btn btn-ghost">View all offers →</a>
-            </div>
-            <div class="grid cols-3">
-              <a href="booking.html" class="tile">
-                <div class="ph ph-sun">🏖️<span class="pill pill-brand">Late deal</span></div>
-                <div class="tile-body">
-                  <span class="muted small">Canary Islands · 7 nights · All inclusive</span>
-                  <h3>Tenerife family sunshine</h3>
-                  <p>4★ resort with kids' club and splash park. Flights from Manchester.</p>
-                  <div class="tile-meta"><span class="price">£549 <small>pp</small></span><span class="pill">Free kids' place</span></div>
-                </div>
-              </a>
-              <a href="booking.html" class="tile">
-                <div class="ph ph-city">🏛️<span class="pill">City break</span></div>
-                <div class="tile-body">
-                  <span class="muted small">Italy · 3 nights · Bed &amp; breakfast</span>
-                  <h3>Rome long weekend</h3>
-                  <p>Boutique hotel a short walk from the Trevi Fountain.</p>
-                  <div class="tile-meta"><span class="price">£329 <small>pp</small></span><span class="pill">Flights incl.</span></div>
-                </div>
-              </a>
-              <a href="booking.html" class="tile">
-                <div class="ph ph-cruise">🛳️<span class="pill">Cruise</span></div>
-                <div class="tile-body">
-                  <span class="muted small">Mediterranean · 10 nights · Full board</span>
-                  <h3>Western Med cruise</h3>
-                  <p>Barcelona, Marseille, Florence and more, with drinks package.</p>
-                  <div class="tile-meta"><span class="price">£1,199 <small>pp</small></span><span class="pill">Drinks incl.</span></div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Reviews carousel: JLM-style "loved by our travellers" -->
+        <!-- Welcome -->
         <section class="section">
+          <div class="container split">
+            <div class="ph ph-dusk">👨‍👩‍👧‍👦</div>
+            <div>
+              <span class="kicker">Welcome</span>
+              <h2>Welcome to our family-owned local independent travel agency</h2>
+              <p class="muted">
+                Placeholder copy. We've been helping local people get away for many years, booking package
+                holidays, cruises, city breaks and tours with trusted UK tour operators at competitive prices.
+              </p>
+              <ul class="checklist">
+                <li>Travel documents delivered and explained before you go</li>
+                <li>Help with amendments, extra luggage and seat upgrades</li>
+                <li>Friendly, personal service from start to finish</li>
+              </ul>
+              <p class="muted">Prefer to chat in person? Pop into our store and we'll help you find the perfect holiday.</p>
+              <a href="contact.html" class="btn btn-teal">Contact us</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section section-white">
           <div class="container" data-carousel>
             <div class="row-between">
               <div class="section-head">
-                <span class="kicker">Reviews</span>
-                <h2>Loved by our travellers</h2>
-                <div class="rating-summary">
-                  <span class="score">4.9</span>
-                  <div><div class="stars">★★★★★</div><span class="muted small">Placeholder rating from 200+ Google reviews</span></div>
-                </div>
+                <span class="kicker">Testimonials</span>
+                <h2>What our customers say</h2>
               </div>
               <div class="carousel-controls">
                 <button class="icon-btn" data-prev aria-label="Previous reviews">←</button>
@@ -212,116 +144,43 @@
             <div class="reviews">
               <article class="card review">
                 <div class="stars">★★★★★</div>
-                <blockquote>"Placeholder review. The team found us the perfect family holiday and sorted everything, even our extra luggage. We wouldn't book anywhere else."</blockquote>
-                <div class="review-author"><span class="avatar">S</span><div><strong>Sarah T.</strong><span>Family holiday · Placeholder</span></div></div>
+                <blockquote>"Placeholder review. Lovely personal service from start to finish. We've booked with them every year and wouldn't go anywhere else."</blockquote>
+                <div class="review-author"><span class="avatar">S</span><div><strong>Sarah T.</strong><span>Placeholder</span></div></div>
               </article>
               <article class="card review">
                 <div class="stars">★★★★★</div>
-                <blockquote>"Placeholder review. Brilliant personal service. When our flight was changed they rang us before we even knew about it."</blockquote>
-                <div class="review-author"><span class="avatar" style="background:var(--brand-500)">M</span><div><strong>Mark &amp; Jean P.</strong><span>Cruise · Placeholder</span></div></div>
+                <blockquote>"Placeholder review. Found us a fantastic deal and sorted our extra luggage with no fuss at all."</blockquote>
+                <div class="review-author"><span class="avatar" style="background:var(--brand-500)">M</span><div><strong>Mark &amp; Jean P.</strong><span>Placeholder</span></div></div>
               </article>
               <article class="card review">
                 <div class="stars">★★★★★</div>
-                <blockquote>"Placeholder review. Been booking with Wardle for over twenty years. Friendly, honest and always great value."</blockquote>
-                <div class="review-author"><span class="avatar" style="background:var(--slate-700)">D</span><div><strong>David R.</strong><span>Repeat customer · Placeholder</span></div></div>
+                <blockquote>"Placeholder review. Friendly, knowledgeable and always there to help. Our documents arrived in good time with everything explained."</blockquote>
+                <div class="review-author"><span class="avatar" style="background:var(--slate-700)">D</span><div><strong>David R.</strong><span>Placeholder</span></div></div>
               </article>
               <article class="card review">
                 <div class="stars">★★★★★</div>
-                <blockquote>"Placeholder review. Planned our honeymoon down to the last detail. Every recommendation was spot on."</blockquote>
-                <div class="review-author"><span class="avatar" style="background:var(--teal-700)">L</span><div><strong>Laura &amp; Tom</strong><span>Honeymoon · Placeholder</span></div></div>
+                <blockquote>"Placeholder review. Planned our cruise perfectly. So much easier than trying to book it all online ourselves."</blockquote>
+                <div class="review-author"><span class="avatar" style="background:var(--teal-700)">L</span><div><strong>Laura &amp; Tom</strong><span>Placeholder</span></div></div>
               </article>
               <article class="card review">
                 <div class="stars">★★★★★</div>
-                <blockquote>"Placeholder review. Popped into the shop for advice and walked out with a holiday booked cheaper than online."</blockquote>
-                <div class="review-author"><span class="avatar" style="background:var(--brand-700)">K</span><div><strong>Karen W.</strong><span>Beach break · Placeholder</span></div></div>
-              </article>
-              <article class="card review">
-                <div class="stars">★★★★★</div>
-                <blockquote>"Placeholder review. Couldn't fault them. Documents delivered, everything explained, and a call to check we got home safe."</blockquote>
-                <div class="review-author"><span class="avatar">G</span><div><strong>Graham H.</strong><span>Tour · Placeholder</span></div></div>
+                <blockquote>"Placeholder review. Always a warm welcome in the shop. Highly recommend to friends and family."</blockquote>
+                <div class="review-author"><span class="avatar" style="background:var(--brand-700)">K</span><div><strong>Karen W.</strong><span>Placeholder</span></div></div>
               </article>
             </div>
           </div>
         </section>
 
-        <!-- Welcome: Wonderling-style family-owned story -->
-        <section class="section section-white">
-          <div class="container split">
-            <div class="ph ph-dusk">👨‍👩‍👧‍👦</div>
+        <!-- Contact -->
+        <section class="section">
+          <div class="container split" style="align-items:start">
             <div>
-              <span class="kicker">Welcome</span>
-              <h2>Your family-run local travel agency</h2>
-              <p class="muted">
-                Placeholder copy. Wardle Travel has been helping local families get away for years. We're
-                independent, which means we work for you, not a single tour operator, and we're right here on
-                the high street when you need us.
-              </p>
-              <ul class="checklist">
-                <li>Personal service from people who know you by name</li>
-                <li>Help with amendments, extra luggage and seat upgrades</li>
-                <li>Travel documents explained and ready before you go</li>
-                <li>Prefer to pop in? Visit us in store for a chat</li>
-              </ul>
-              <a href="about.html" class="btn btn-teal">More about us</a>
+              <span class="kicker">Contact</span>
+              <h2>Visit us in store</h2>
+              <p class="muted">Placeholder copy. Book in store with our friendly team, or give us a call and we'll be happy to help.</p>
+              <div class="card" data-hours style="margin-top:1.25rem"></div>
             </div>
-          </div>
-        </section>
-
-        <!-- Popular destinations -->
-        <section class="section">
-          <div class="container">
-            <div class="row-between">
-              <div class="section-head">
-                <span class="kicker">Get inspired</span>
-                <h2>Popular destinations</h2>
-              </div>
-              <a href="destinations.html" class="btn btn-ghost">All destinations →</a>
-            </div>
-            <div class="grid cols-4">
-              <a href="destinations.html" class="tile"><div class="ph ph-island">🌴</div><div class="tile-body"><h3>Caribbean</h3><p class="mb-0">From £999pp</p></div></a>
-              <a href="destinations.html" class="tile"><div class="ph ph-sun">☀️</div><div class="tile-body"><h3>Spain &amp; Islands</h3><p class="mb-0">From £299pp</p></div></a>
-              <a href="destinations.html" class="tile"><div class="ph ph-safari">🦁</div><div class="tile-body"><h3>Africa</h3><p class="mb-0">From £1,499pp</p></div></a>
-              <a href="destinations.html" class="tile"><div class="ph ph-snow">🏔️</div><div class="tile-body"><h3>Ski &amp; Snow</h3><p class="mb-0">From £599pp</p></div></a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Branches: both reference sites list branches with contact details -->
-        <section class="section section-white" id="branches">
-          <div class="container">
-            <div class="section-head">
-              <span class="kicker">Visit us</span>
-              <h2>Pop in and say hello</h2>
-              <p>Prefer to talk face to face? Our team would love to help plan your next trip.</p>
-            </div>
-            <div class="grid cols-2" data-branches></div>
-          </div>
-        </section>
-
-        <!-- CTA band + newsletter -->
-        <section class="section">
-          <div class="container">
-            <div class="cta-band">
-              <div>
-                <h2>Ready to start planning?</h2>
-                <p>Tell us what you're dreaming of and we'll come back with ideas and a no-obligation quote.</p>
-              </div>
-              <div class="hero-ctas" style="margin:0">
-                <a href="contact.html#quote" class="btn btn-ghost">Get a quote</a>
-                <a href="#" data-main-phone class="btn btn-light">Call us</a>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between">
-              <div>
-                <h3 class="mb-0">Get deals in your inbox</h3>
-                <p class="muted small mb-0">Exclusive offers and late deals. No spam, unsubscribe any time.</p>
-              </div>
-              <form class="newsletter" data-demo-form="Newsletter sign-up is a placeholder in this demo.">
-                <input type="email" placeholder="Your email address" aria-label="Email address" required />
-                <button class="btn btn-primary">Sign up</button>
-              </form>
-            </div>
+            <div data-branch data-branch-link></div>
           </div>
         </section>
       </main>

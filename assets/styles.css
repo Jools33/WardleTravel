@@ -696,7 +696,7 @@ label {
 .branch .actions .btn { padding: 0.55rem 1rem; font-size: 0.85rem; }
 
 .map-ph {
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 16 / 5;
   border-radius: var(--radius-2xl);
   margin-bottom: 1.25rem;
   font-size: 2rem;
@@ -889,30 +889,6 @@ details p { margin: 0.75rem 0 0; color: var(--slate-500); font-size: 0.95rem; }
   .footer-grid { grid-template-columns: 1fr; }
 }
 
-/* Floating WhatsApp button (JLM-style) */
-.whatsapp-fab {
-  position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 60;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.1rem;
-  border-radius: 999px;
-  background: #25d366;
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.9rem;
-  box-shadow: var(--shadow-lg);
-}
-
-.whatsapp-fab:hover { color: #fff; background: #1ebe5b; }
-
-@media (max-width: 500px) {
-  .whatsapp-fab .label { display: none; }
-}
-
 /* Demo banner */
 .demo-banner {
   background: var(--brand-50);
@@ -929,3 +905,91 @@ details p { margin: 0.75rem 0 0; color: var(--slate-500); font-size: 0.95rem; }
 .mt-0 { margin-top: 0; }
 .mb-0 { margin-bottom: 0; }
 .center { text-align: center; }
+
+/* ---------- Booking-first hero (Wonderling-style) ---------- */
+
+.book-hero .container {
+  display: block;
+  text-align: center;
+  padding-top: 3.5rem;
+  padding-bottom: 7rem;
+}
+
+.book-hero h1 { text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 0.25rem; }
+
+.book-hero .lead {
+  margin: 0 auto;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.booking-wrap {
+  position: relative;
+  z-index: 2;
+  margin-top: -5rem;
+}
+
+.booking-card {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--warm-200);
+  border-radius: var(--radius-3xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.booking-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 0.75rem;
+}
+
+.booking-grid .wide { grid-column: span 2; }
+
+.booking-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.booking-actions .note { margin: 0; text-align: left; }
+
+@media (max-width: 860px) {
+  .booking-grid { grid-template-columns: 1fr 1fr; }
+  .booking-grid .wide { grid-column: span 2; }
+}
+
+@media (max-width: 520px) {
+  .booking-card { padding: 1.25rem; }
+  .booking-actions .btn { width: 100%; }
+}
+
+.included-head {
+  text-align: center;
+  font-weight: 700;
+  color: var(--slate-800);
+  font-size: 1.1rem;
+  margin: 2.5rem 0 1.25rem;
+}
+
+/* Opening hours table */
+.hours { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.hours th, .hours td { padding: 0.6rem 0; border-bottom: 1px solid var(--warm-200); text-align: left; }
+.hours th { font-weight: 600; color: var(--slate-700); }
+.hours td { text-align: right; color: var(--slate-600); }
+.hours td.closed { color: var(--brand-600); font-weight: 600; }
+.hours tr:last-child th, .hours tr:last-child td { border-bottom: 0; }
+
+/* Team bios */
+.bio { display: flex; gap: 1.25rem; align-items: flex-start; }
+.bio .avatar { flex: none; width: 4.5rem; height: 4.5rem; font-size: 1.5rem; }
+.bio p { color: var(--slate-500); font-size: 0.95rem; margin: 0.5rem 0 0; }
+.bio .role { color: var(--brand-600); font-size: 0.82rem; font-weight: 600; }
