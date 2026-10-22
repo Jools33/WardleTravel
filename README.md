@@ -28,6 +28,10 @@ echo -n "new-passcode" | sha256sum
 
 Branch names, addresses and phone numbers live in `BUSINESS` at the top of `assets/site.js`. They are placeholders for now (phone numbers use the Ofcom 01632 960xxx range reserved for fiction); swap in the real details once confirmed.
 
+## Caching
+
+GitHub Pages lets browsers cache CSS and JS for about 10 minutes. After changing `assets/styles.css` or `assets/site.js`, bump the `?v=` number on their links in each HTML file so visitors get the new version straight away.
+
 ## Run locally
 
 ```sh
